@@ -16,11 +16,15 @@ page=http_pool.post_url(URL,fields)
 #print page.data
 
 soup=BeautifulSoup(page.data)
-results = soup.findAll('span', attrs={'style' : "font-weight:bold;color:#003366;"})
+bio = soup.findAll('span', attrs={'style' : "font-weight:bold;color:#003366;"})
 
-roll=results[0].renderContents()
-name=results[1].renderContents()
-print roll ," - ", name
+roll=bio[0].renderContents()
+name=bio[1].renderContents()
+
+degree = soup.findAll('strong')
+branch=degree[3].renderContents()
+
+print roll ," - ", name , branch
 
 
 

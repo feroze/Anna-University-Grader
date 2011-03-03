@@ -6,8 +6,7 @@ Improvement: Scraping grades to generate GPA, statistics
 
 Feroze Naina
 """
-
-
+from decimal import *
 import urllib3
 from BeautifulSoup import BeautifulSoup
 import sqlite3
@@ -89,8 +88,8 @@ def scraper(first,last):
         
         print roll ," - ", name
         print branch
-        for sub in grades:
-            print sub
+        """for sub in grades:
+            print sub"""
      
        
         """ This is seriously FAIL method
@@ -109,13 +108,28 @@ def scraper(first,last):
         for arr in grades:
             marks.append(marker(arr))
         
-        for arr in marks:
-            print arr
+        """for arr in marks:
+            print arr"""
         
-        
+        total=(marks[0]*4)+(marks[1]*4)+(marks[2]*3)+(marks[3]*3)+(marks[4]*5)+(marks[5]*3)+(marks[6]*2)+(marks[7]*2)
+        getcontext().prec=3 #For precision :|
+        _gpa=Decimal(total)/Decimal(26)
+        gpa=_gpa
         
         
         #Sqlite insert
-        """t=(roll,name)
-        f.execute('insert into marks values (?,?)',t)"""
-scraper(1027940,1027941)
+        t=[roll,name,branch] #list
+        for arr in grades:
+            t.append(arr)
+            
+        for arr in marks:
+            t.append(arr)
+            
+        t.append(float(gpa))
+        #print t
+        tuple(t)
+        
+        conn.execute('insert into marks values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',t)
+        conn.commit()
+        conn.close()
+scraper(1027581,1027698)

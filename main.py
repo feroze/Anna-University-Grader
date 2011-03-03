@@ -12,18 +12,43 @@ import urllib3
 from BeautifulSoup import BeautifulSoup
 import sqlite3
 import base64
+import os
 
-conn = sqlite3.connect('test.db')
+mydb_path = 'test.db'
 
-"""f= conn.cursor()
 
-f.execute('create table marks (roll text, name text, branch text,\
-g186101 text, g181101 text, g182101 text, g183101 text,\
-g185101 text, g186102 text,g186151 text, g186152 text,\
-m186101 integer, m181101 integer, m182101 integer, m183101 integer,\
-m185101 integer, m186102 integer,m186151 integer, m186152 integer, GPA integer)')"""
+if not os.path.exists(mydb_path):
+    #create new DB, create table stocks
+    conn = sqlite3.connect(mydb_path)
+    conn.execute('''create table marks (roll text, name text, branch text,
+    g186101 text, g181101 text, g182101 text, g183101 text,
+    g185101 text, g186102 text,g186151 text, g186152 text,
+    m186101 integer, m181101 integer, m182101 integer, m183101 integer,
+    m185101 integer, m186102 integer,m186151 integer,
+    m186152 integer, GPA integer)''')
+else:
+    #use existing DB
+    conn = sqlite3.connect(mydb_path)
+
+#Grade -> Mark Converter
+def marker(grade):
+    if grade == 'S':
+        return 10
+    elif grade == 'A':
+        return 9
+    elif grade == 'B':
+        return 8
+    elif grade == 'C':
+        return 7
+    elif grade == 'D':
+        return 6
+    elif grade == 'E':
+        return 5
+    elif grade == 'U':
+        return 0
     
-
+    
+    
 def scraper(first,last):
     for i in range (first,last+1):
         regno= str(i)
@@ -50,7 +75,9 @@ def scraper(first,last):
         for arr in range(0,8):
             grades.append(results[arr+2].renderContents())
         
-        """g186101=results[2].renderContents()
+        
+        """ This is seriously FAIL method
+        g186101=results[2].renderContents()
         g181101=results[3].renderContents()
         g182101=results[4].renderContents()
         g183101=results[5].renderContents()
@@ -61,8 +88,13 @@ def scraper(first,last):
         
         
         print roll ," - ", name
-        #print branch
-        """print g186101
+        print branch
+        for sub in grades:
+            print sub
+     
+       
+        """ This is seriously FAIL method
+        print g186101
         print g181101
         print g182101
         print g183101
@@ -70,10 +102,20 @@ def scraper(first,last):
         print g185102
         print g185151
         print g185152"""
-        for sub in grades:
-            print sub
+        
+        #Convert grades to marks
+        marks=[]
+        
+        for arr in grades:
+            marks.append(marker(arr))
+        
+        for arr in marks:
+            print arr
+        
+        
+        
         
         #Sqlite insert
         """t=(roll,name)
         f.execute('insert into marks values (?,?)',t)"""
-scraper(1027940,1027950)
+scraper(1027940,1027941)

@@ -131,5 +131,15 @@ def scraper(first,last):
         
         conn.execute('insert into marks values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',t)
         conn.commit()
-        conn.close()
-scraper(1027581,1027698)
+        
+
+
+#scraper(1027171,1027286) #Civil
+#scraper(1027287,1027402) #Mech
+#scraper(1027403,1027462) #Prod
+#scraper(1027463,1027580) #EEE
+scraper(1027581,1027698)#EIE
+#scraper(1027699,1027817) #IT
+#scraper(1027818,1027933) #CSE
+#scraper(1027934,1028049) #ECE
+conn.close()

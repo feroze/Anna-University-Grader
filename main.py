@@ -13,7 +13,15 @@ from BeautifulSoup import BeautifulSoup
 import sqlite3
 import base64
 
+conn = sqlite3.connect('test.db')
 
+f= conn.cursor()
+
+f.execute('create table marks (roll text, name text, branch text,\
+g186101 text, g181101 text, g182101 text, g183101 text,\
+g185101 text, g186102 text,g186151 text, g186152 text,\
+m186101 integer, m181101 integer, m182101 integer, m183101 integer,\
+m185101 integer, m186102 integer,m186151 integer, m186152 integer, GPA integer)')
     
 
 def scraper(first,last):
@@ -50,7 +58,7 @@ def scraper(first,last):
         
         
         print roll ," - ", name
-        print branch
+        #print branch
         print g186101
         print g181101
         print g182101
@@ -60,5 +68,7 @@ def scraper(first,last):
         print g185151
         print g185152
         
-        
-scraper(1027605,1027608)
+        #Sqlite insert
+        """t=(roll,name)
+        f.execute('insert into marks values (?,?)',t)"""
+#scraper(1027586,1027596)

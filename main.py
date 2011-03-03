@@ -15,13 +15,13 @@ import base64
 
 conn = sqlite3.connect('test.db')
 
-f= conn.cursor()
+"""f= conn.cursor()
 
 f.execute('create table marks (roll text, name text, branch text,\
 g186101 text, g181101 text, g182101 text, g183101 text,\
 g185101 text, g186102 text,g186151 text, g186152 text,\
 m186101 integer, m181101 integer, m182101 integer, m183101 integer,\
-m185101 integer, m186102 integer,m186151 integer, m186152 integer, GPA integer)')
+m185101 integer, m186102 integer,m186151 integer, m186152 integer, GPA integer)')"""
     
 
 def scraper(first,last):
@@ -46,29 +46,34 @@ def scraper(first,last):
         #Extract grades
         results=soup.findAll('div', attrs={'align':"center"})
         
+        grades=[]
+        for arr in range(0,8):
+            grades.append(results[arr+2].renderContents())
         
-        g186101=results[2].renderContents()
+        """g186101=results[2].renderContents()
         g181101=results[3].renderContents()
         g182101=results[4].renderContents()
         g183101=results[5].renderContents()
         g185101=results[6].renderContents()
         g185102=results[7].renderContents()
         g185151=results[8].renderContents()
-        g185152=results[9].renderContents()
+        g185152=results[9].renderContents()"""
         
         
         print roll ," - ", name
         #print branch
-        print g186101
+        """print g186101
         print g181101
         print g182101
         print g183101
         print g185101
         print g185102
         print g185151
-        print g185152
+        print g185152"""
+        for sub in grades:
+            print sub
         
         #Sqlite insert
         """t=(roll,name)
         f.execute('insert into marks values (?,?)',t)"""
-#scraper(1027586,1027596)
+scraper(1027940,1027950)

@@ -1,1 +1,8 @@
 * Implement GAE version with BigTable
+
+List comprehension
+Use dictionary to convert grades to marks
+
+
+<GeneralMaximus> Genghiz: with open(bar) as foo:
+<GeneralMaximus> Genghiz:     <code goes here>

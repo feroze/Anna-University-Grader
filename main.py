@@ -16,18 +16,7 @@ import os
 mydb_path = 'test.db'
 
 
-if not os.path.exists(mydb_path):
-    #create new DB, create table stocks
-    conn = sqlite3.connect(mydb_path)
-    conn.execute('''create table marks (roll text, name text, branch text,
-    g186101 text, g181101 text, g182101 text, g183101 text,
-    g185101 text, g186102 text,g186151 text, g186152 text,
-    m186101 integer, m181101 integer, m182101 integer, m183101 integer,
-    m185101 integer, m186102 integer,m186151 integer,
-    m186152 integer, GPA integer)''')
-else:
-    #use existing DB
-    conn = sqlite3.connect(mydb_path)
+
 
 #Grade -> Mark Converter
 def marker(grade):
@@ -46,9 +35,28 @@ def marker(grade):
     elif grade == 'U':
         return 0
     
-    
+
     
 def scraper(first,last):
+    #Check if db exists
+    print "Enter table name"
+    table_name=str(raw_input())
+    create_table='''create table ''' +table_name+ ''' (roll text, name text,
+    g186101 text, g181101 text, g182101 text, g183101 text,
+    g185101 text, g186102 text,g186151 text, g186152 text,
+    m186101 integer, m181101 integer, m182101 integer, m183101 integer,
+    m185101 integer, m186102 integer,m186151 integer,
+    m186152 integer, GPA integer)'''
+   
+    if not os.path.exists(mydb_path):
+        #create new DB, create table
+        conn = sqlite3.connect(mydb_path)
+        conn.execute(create_table)
+    else:
+        #use existing DB
+        conn = sqlite3.connect(mydb_path)
+        conn.execute(create_table)
+    
     for i in range (first,last+1):
         regno= str(i)
         URL="http://www1.annatech.ac.in/result/index.php?regno="+ base64.encodestring(str(regno))
@@ -118,7 +126,7 @@ def scraper(first,last):
         
         
         #Sqlite insert
-        t=[roll,name,branch] #list
+        t=[roll,name] #list
         for arr in grades:
             t.append(arr)
             
@@ -129,7 +137,7 @@ def scraper(first,last):
         #print t
         tuple(t)
         
-        conn.execute('insert into marks values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',t)
+        conn.execute('insert into '+table_name+' values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',t)
         conn.commit()
         
 

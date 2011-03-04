@@ -1,3 +1,8 @@
-ANNA University Grade Scraper v0.1
+ANNA University Grade Scraper
 
-General outlines and program flow created.
+Static HTML files works.
+
+First use main.py to populate db, then use output.py.
+
+
+A big shout-out to my #h-i homies especially Elvis Presly and kitallis for answering my n00b qs.

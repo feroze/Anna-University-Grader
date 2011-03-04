@@ -55,7 +55,7 @@ def scraper(first,last,table_name):
     else:
         #use existing DB
         conn = sqlite3.connect(mydb_path)
-        conn.execute(create_table)
+        #conn.execute(create_table)
     
     for i in range (first,last+1):
         regno= str(i)
@@ -141,6 +141,8 @@ def scraper(first,last,table_name):
         
         total=(marks[0]*4)+(marks[1]*4)+(marks[2]*3)+(marks[3]*3)+(marks[4]*5)+(marks[5]*3)+(marks[6]*2)+(marks[7]*2)
         getcontext().prec=3 #For precision :|
+        #if credits==0:
+        #    pass
         _gpa=Decimal(total)/Decimal(credits)
         gpa=_gpa
         
@@ -164,11 +166,13 @@ def scraper(first,last,table_name):
 
 #scraper(1027694,1027695,'EIE') #Arrear test
 
-scraper(1027171,1027286,'Civil') #Civil
-scraper(1027287,1027402,'Mech') #Mech
-scraper(1027403,1027462,'Prod') #Prod
-scraper(1027463,1027580,'EEE') #EEE
-scraper(1027581,1027698,'EIE')#EIE
-scraper(1027699,1027817,'IT') #IT
-scraper(1027818,1027933,'CSE') #CSE
-scraper(1027934,1028049,'ECE') #ECE
+#scraper(1027171,1027286,'Civil') #Civil
+#scraper(1027287,1027402,'Mech') #Mech
+#scraper(1027403,1027462,'Prod') #Prod
+#scraper(1027463,1027580,'EEE') #EEE
+#scraper(1027581,1027698,'EIE')#EIE
+#scraper(1027699,1027817,'IT') #IT
+#scraper(1027818,1027933,'CSE') #CSE
+#scraper(1027934,1028000,'ECE') #ECE -> 1028001 is absent for all
+#scraper(1028002,1028049,'ECE') #ECE
+

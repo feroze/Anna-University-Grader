@@ -32,15 +32,15 @@ def marker(grade):
         return 6
     elif grade == 'E':
         return 5
-    elif grade == 'U':
+    else:
         return 0
     
 
     
-def scraper(first,last):
+def scraper(first,last,table_name):
     #Check if db exists
-    print "Enter table name"
-    table_name=str(raw_input())
+    #print "Enter table name"
+    #table_name=str(raw_input())
     create_table='''create table ''' +table_name+ ''' (roll text, name text,
     g186101 text, g181101 text, g182101 text, g183101 text,
     g185101 text, g186102 text,g186151 text, g186152 text,
@@ -111,6 +111,7 @@ def scraper(first,last):
         print g185152"""
         
         #Convert grades to marks
+        credits=26
         marks=[]
         
         for arr in grades:
@@ -118,10 +119,29 @@ def scraper(first,last):
         
         """for arr in marks:
             print arr"""
+            
+        #Reduces Total Credit for arrears
+        if marks[0]==0:
+            credits=credits-4
+        if marks[1]==0:
+            credits=credits-4
+        if marks[2]==0:
+            credits=credits-3
+        if marks[3]==0:
+            credits=credits-3
+        if marks[4]==0:
+            credits=credits-5
+        if marks[5]==0:
+            credits=credits-3
+        if marks[6]==0:
+            credits=credits-2
+        if marks[7]==0:
+            credits=credits-2
+            
         
         total=(marks[0]*4)+(marks[1]*4)+(marks[2]*3)+(marks[3]*3)+(marks[4]*5)+(marks[5]*3)+(marks[6]*2)+(marks[7]*2)
         getcontext().prec=3 #For precision :|
-        _gpa=Decimal(total)/Decimal(26)
+        _gpa=Decimal(total)/Decimal(credits)
         gpa=_gpa
         
         
@@ -142,12 +162,13 @@ def scraper(first,last):
         
 
 
-#scraper(1027171,1027286) #Civil
-#scraper(1027287,1027402) #Mech
-#scraper(1027403,1027462) #Prod
-#scraper(1027463,1027580) #EEE
-scraper(1027581,1027698)#EIE
-#scraper(1027699,1027817) #IT
-#scraper(1027818,1027933) #CSE
-#scraper(1027934,1028049) #ECE
-conn.close()
+#scraper(1027694,1027695,'EIE') #Arrear test
+
+scraper(1027171,1027286,'Civil') #Civil
+scraper(1027287,1027402,'Mech') #Mech
+scraper(1027403,1027462,'Prod') #Prod
+scraper(1027463,1027580,'EEE') #EEE
+scraper(1027581,1027698,'EIE')#EIE
+scraper(1027699,1027817,'IT') #IT
+scraper(1027818,1027933,'CSE') #CSE
+scraper(1027934,1028049,'ECE') #ECE

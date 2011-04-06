@@ -2,7 +2,13 @@ ANNA University Grade Scraper
 
 Static HTML files works.
 
-First use main.py to populate db, then use output.py.
+First use main.py to populate db, then use output.py to generate HTML code.
+
+TODO : 
+1. Expand to other colleges
+2. Use Django-nonrel to enable GAE hosting
+3. Implement "Export to .xls"
+4. Be able to select students and do comparison
 
 
 A big shout-out to my #h-i homies especially Elvis Presly and kitallis for answering my n00b qs.

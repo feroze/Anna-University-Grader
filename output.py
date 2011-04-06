@@ -1,11 +1,13 @@
 #!/usr/bin/env python
-"""
+
+'''
+Output -> To print each sqlite table
 Anna University Grader -> Extracts grades from anna univ site
 
-Improvement: Scraping grades to generate GPA, statistics
+NOTE: USE FRAMEWORK NEXT TIME. Hardcoded pages are n00b.
 
 Feroze Naina
-"""
+'''
 
 from sqlite3 import *
 from BeautifulSoup import BeautifulSoup
@@ -15,6 +17,7 @@ from BeautifulSoup import BeautifulSoup
 def htmlprint(branch):
     f = open('temp.html', 'w')
     
+    #Hard insert CSS and Google Analytics
     headers='''<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
     <html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head>
 

@@ -1,3 +1,14 @@
+##!/usr/bin/env python
+
+'''
+NON FUNCTIONING
+Still under works
+Code to find each college's range of roll numbers
+1st year results have approximately 30 seats reserved which are left blank at the end
+
+Feroze Naina
+'''
+
 from decimal import *
 import urllib3
 from BeautifulSoup import BeautifulSoup

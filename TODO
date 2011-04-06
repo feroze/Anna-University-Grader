@@ -2,7 +2,8 @@
 
 List comprehension
 Use dictionary to convert grades to marks
+Seperate college regno ranges
+
+1038841 -> SVCE
 
 
-<GeneralMaximus> Genghiz: with open(bar) as foo:
-<GeneralMaximus> Genghiz:     <code goes here>
